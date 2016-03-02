@@ -1,5 +1,5 @@
 (function() {
-  var holderElement, i, images, img, len, makeFasionTile, tileElement;
+  var containerAll, holderElement, i, image, images, img, len, makeFasionTile, setClickEvent, tileElement;
 
   images = [
     {
@@ -59,17 +59,38 @@
     tileInnerHTML = "<img src=\"" + tileInfo.src + "\" alt=\"" + tileInfo.title + "\">";
     containerElement = document.createElement("div");
     containerElement.classList.add("container");
+    containerElement.classList.add("unFocusedTile");
     containerElement.style.width = tileInfo.tileSize.width + "px";
     containerElement.style.height = tileInfo.tileSize.height + "px";
     containerElement.innerHTML = tileInnerHTML;
     return containerElement;
   };
 
+  image = document.getElementById("picView");
+
+  containerAll = document.getElementById("totalCon");
+
+  setClickEvent = function(tiles, tileInfo) {
+    return tiles.addEventListener("click", function(event) {
+      var bigImage;
+      bigImage = document.getElementById("bigImg");
+      bigImage.setAttribute("src", tileInfo.src);
+      image.style.visibility = "visible";
+      return containerAll.style.opacity = .2;
+    });
+  };
+
+  image.addEventListener("click", function(event) {
+    image.style.visibility = "hidden";
+    return containerAll.style.opacity = 1;
+  });
+
   holderElement = document.getElementById("tileHolder");
 
   for (i = 0, len = images.length; i < len; i++) {
     img = images[i];
     tileElement = makeFasionTile(img);
+    setClickEvent(tileElement, img);
     holderElement.appendChild(tileElement);
   }
 

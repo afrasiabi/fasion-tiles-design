@@ -3,10 +3,6 @@
 	src:url("./assets/fonts/helvetica/HelveticaNeueLTStd-Md.otf");
 }
 
-@font-face {
-	font-family: HelveticaNeueLight;
-	src:url("./assets/fonts/helvetica/HelveticaNeueLTStd-Lt.otf");
-}
 body{
 	/*background-image: url("./assets/pics/bg.jpg");*/
 	background-color: #934747;
@@ -19,20 +15,38 @@ body{
 	right: 20px;
 	bottom: 100px;	
 	background-color: #655252;
-	background-image: url("./assets/pics/kind.png");
-	background-repeat: no-repeat;
+	/*background-image: url("./assets/pics/kind.png");
+	background-repeat: no-repeat;*/
 	background-size: 100%;
-
-	background-size: 100%;
-	width: 16.3%
+	width: 16.3%;
 }
-.picView{
-	position: absolute;
-	top: 50px;
-	right: 50px;
-	bottom: 50px;
-	right: 50px;	
+.containerTxt img{
+	height: 70%;
+	width: 70%;
+	display: block;
+	margin-left: auto;
+   margin-right: auto;
+}
+#picView{
+	z-index: 1;
+	display: inline-block;
+	visibility: hidden;
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   width: 1000px;
+   height: 800px;
+   margin: auto;
 	background-color: white;
+}
+#picView:hover{
+	cursor: zoom-out;
+}
+#picView #bigImg{
+	width: 100%;
+	height: 100%
 }
 .containerAll{
 	position: absolute;
@@ -43,8 +57,6 @@ body{
 	background-repeat: no-repeat;
 	background-size: 100%;
 	width: 80%;
-	/*height: 90%;*/
-	/*opacity: .5;*/
 }
 .containerAll .title{
 	font-size: 10;
@@ -52,9 +64,10 @@ body{
 	font-weight: bold;
 	margin-left: 45%;
 	margin-top: 10px;
+	font-family: HelveticaNeue;
 }
 .containerAll .desc{
-	font-size: 30px;
+	font-size: 50px;
 	color: white;
 	position: absolute;;
 	left: 20px;
@@ -66,6 +79,10 @@ body{
 	left: 20px;
 	right: 20px;
 }
+.unFocusedTile:hover{
+	transform: scale(1.05, 1.05);
+	transition: 600ms all cubic-bezier(0, 1.52, 1, 1.01);
+}
 .container {
 	position: relative;
 	margin-right: 0px;
@@ -73,10 +90,7 @@ body{
 	float: left;
 	width: 400px;
 	height: 400px;
-	/*transform: scale(1, 1);*/
-	/*transition: 300ms all cubic-bezier(0, 1.52, 1, 1.01);
 	cursor: zoom-in;
-	box-shadow: 5px 5px 5px #888888;*/
 }
 .container img {
 	height: 100%;

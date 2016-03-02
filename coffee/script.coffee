@@ -59,15 +59,32 @@ images = [
 makeFasionTile = (tileInfo) ->
 	tileInnerHTML = """
 		<img src="#{tileInfo.src}" alt="#{tileInfo.title}">
-	 """
+	"""
 	containerElement = document.createElement "div"
 	containerElement.classList.add "container"
+	containerElement.classList.add "unFocusedTile"
 	containerElement.style.width = tileInfo.tileSize.width + "px"
 	containerElement.style.height = tileInfo.tileSize.height + "px"
 	containerElement.innerHTML = tileInnerHTML
 	return containerElement
 
+image = document.getElementById "picView"
+containerAll = document.getElementById "totalCon"
+
+setClickEvent = (tiles,tileInfo) ->
+	tiles.addEventListener "click", (event) ->
+		bigImage = document.getElementById "bigImg"
+		bigImage.setAttribute("src",tileInfo.src)
+		image.style.visibility = "visible";
+		containerAll.style.opacity = .2
+
+image.addEventListener "click" , (event) ->
+	image.style.visibility = "hidden";
+	containerAll.style.opacity = 1
+		
 holderElement = document.getElementById "tileHolder"
 for img in images
 	tileElement = makeFasionTile(img)
+	setClickEvent(tileElement,img)
 	holderElement.appendChild(tileElement)
+
