@@ -1,0 +1,84 @@
+@font-face {
+	font-family: HelveticaNeue;
+	src:url("./assets/fonts/helvetica/HelveticaNeueLTStd-Md.otf");
+}
+
+@font-face {
+	font-family: HelveticaNeueLight;
+	src:url("./assets/fonts/helvetica/HelveticaNeueLTStd-Lt.otf");
+}
+body{
+	/*background-image: url("./assets/pics/bg.jpg");*/
+	background-color: #934747;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+.containerTxt{
+	position: absolute;
+	top: 100px;
+	right: 20px;
+	bottom: 100px;	
+	background-color: #655252;
+	background-image: url("./assets/pics/kind.png");
+	background-repeat: no-repeat;
+	background-size: 100%;
+
+	background-size: 100%;
+	width: 16.3%
+}
+.picView{
+	position: absolute;
+	top: 50px;
+	right: 50px;
+	bottom: 50px;
+	right: 50px;	
+	background-color: white;
+}
+.containerAll{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	bottom: 20px;
+	background-image: url("./assets/pics/spring.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	width: 80%;
+	/*height: 90%;*/
+	/*opacity: .5;*/
+}
+.containerAll .title{
+	font-size: 10;
+	color: black;
+	font-weight: bold;
+	margin-left: 45%;
+	margin-top: 10px;
+}
+.containerAll .desc{
+	font-size: 30px;
+	color: white;
+	position: absolute;;
+	left: 20px;
+	top: 60px;
+}
+#tileHolder{
+	position: absolute;
+	top: 150px;
+	left: 20px;
+	right: 20px;
+}
+.container {
+	position: relative;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	float: left;
+	width: 400px;
+	height: 400px;
+	/*transform: scale(1, 1);*/
+	/*transition: 300ms all cubic-bezier(0, 1.52, 1, 1.01);
+	cursor: zoom-in;
+	box-shadow: 5px 5px 5px #888888;*/
+}
+.container img {
+	height: 100%;
+	width: 100%;
+	}
