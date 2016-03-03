@@ -2,6 +2,10 @@
 	font-family: HelveticaNeue;
 	src:url("./assets/fonts/helvetica/HelveticaNeueLTStd-Md.otf");
 }
+@font-face {
+	font-family: HelveticaNeueLight;
+	src:url("./assets/fonts/helvetica/HelveticaNeueLTStd-Lt.otf");
+}
 
 body{
 	/*background-image: url("./assets/pics/bg.jpg");*/
@@ -11,14 +15,21 @@ body{
 }
 .containerTxt{
 	position: absolute;
-	top: 100px;
+	top: 400px;
 	right: 20px;
-	bottom: 100px;	
-	background-color: #655252;
+	bottom: 400px;	
+	background-color: #D38888;
 	/*background-image: url("./assets/pics/kind.png");
 	background-repeat: no-repeat;*/
 	background-size: 100%;
 	width: 16.3%;
+}
+.containerTxt .txt{
+	position: absolute;
+	font-size: 40px;
+	top: 25px;
+	right: 5px;
+	font-family: HelveticaNeueLight;
 }
 .containerTxt img{
 	height: 70%;
