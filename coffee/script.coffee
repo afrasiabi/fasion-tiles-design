@@ -70,17 +70,22 @@ makeFasionTile = (tileInfo) ->
 
 image = document.getElementById "picView"
 containerAll = document.getElementById "totalCon"
+bigImage = document.getElementById "bigImg"
+
+show = (imgSrc) ->
+	bigImage.setAttribute("src", imgSrc)
+	image.style.visibility = "visible"
+	containerAll.style.opacity = .2
+	
+hide = ->
+	image.style.visibility = "hidden"
+	containerAll.style.opacity = 1
 
 setClickEvent = (tiles,tileInfo) ->
 	tiles.addEventListener "click", (event) ->
-		bigImage = document.getElementById "bigImg"
-		bigImage.setAttribute("src",tileInfo.src)
-		image.style.visibility = "visible";
-		containerAll.style.opacity = .2
+		show(tileInfo.src)
 
-image.addEventListener "click" , (event) ->
-	image.style.visibility = "hidden";
-	containerAll.style.opacity = 1
+image.addEventListener "click" , hide 
 		
 holderElement = document.getElementById "tileHolder"
 for img in images
