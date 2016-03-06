@@ -1,61 +1,10 @@
-var bigImage, containerAll, hide, holderElement, i, image, images, img, len, makeFasionTile, setClickEvent, show, tileElement;
+var bigImage, containerAll, hide, holderElement, image, images, makeFasionTile, makeRequest, setClickEvent, show;
 
-images = [
-  {
-    src: "./assets/pics/Fasionairy.png",
-    title: "Fasion",
-    tileSize: {
-      width: 250,
-      height: 250
-    }
-  }, {
-    src: "./assets/pics/menStyle.jpg",
-    title: "menStyle",
-    tileSize: {
-      width: 300,
-      height: 300
-    }
-  }, {
-    src: "./assets/pics/walkThrough.jpg",
-    title: "walkThrough",
-    tileSize: {
-      width: 250,
-      height: 250
-    }
-  }, {
-    src: "./assets/pics/sweetHome.jpg",
-    title: "sweetHome",
-    tileSize: {
-      width: 500,
-      height: 300
-    }
-  }, {
-    src: "./assets/pics/babies.jpg",
-    title: "babies",
-    tileSize: {
-      width: 400,
-      height: 300
-    }
-  }, {
-    src: "./assets/pics/coool.jpg",
-    title: "cool",
-    tileSize: {
-      width: 500,
-      height: 345
-    }
-  }, {
-    src: "./assets/pics/beautiful.png",
-    title: "beautiful",
-    tileSize: {
-      width: 320,
-      height: 320
-    }
-  }
-];
+images = [];
 
 makeFasionTile = function(tileInfo) {
   var containerElement, tileInnerHTML;
-  tileInnerHTML = "<img src=\"" + tileInfo.src + "\" alt=\"" + tileInfo.title + "\">";
+  tileInnerHTML = "<img src=\"" + tileInfo.source + "\" alt=\"" + tileInfo.title + "\">";
   containerElement = document.createElement("div");
   containerElement.classList.add("container");
   containerElement.classList.add("unFocusedTile");
@@ -84,17 +33,50 @@ hide = function() {
 
 setClickEvent = function(tiles, tileInfo) {
   return tiles.addEventListener("click", function(event) {
-    return show(tileInfo.src);
+    return show(tileInfo.source);
   });
 };
 
 image.addEventListener("click", hide);
 
+makeRequest = function(url, cbFunc) {
+  var alertContents, httpRequest;
+  alertContents = function() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        cbFunc(httpRequest.responseText);
+      } else {
+        alert("There was a problem with the request to " + url);
+      }
+    }
+  };
+  httpRequest = new XMLHttpRequest;
+  if (!httpRequest) {
+    alert('Giving up :( Cannot create an XMLHTTP instance');
+    return false;
+  } else {
+    httpRequest.onreadystatechange = alertContents;
+    httpRequest.open('GET', url);
+    httpRequest.send();
+  }
+};
+
 holderElement = document.getElementById("tileHolder");
 
-for (i = 0, len = images.length; i < len; i++) {
-  img = images[i];
-  tileElement = makeFasionTile(img);
-  setClickEvent(tileElement, img);
-  holderElement.appendChild(tileElement);
-}
+makeRequest("http://localhost:3000/gettingTiles", function(res) {
+  var i, img, len, ref, resObject, results, tileElement;
+  resObject = JSON.parse(res);
+  if (resObject.success) {
+    ref = resObject.tiles;
+    results = [];
+    for (i = 0, len = ref.length; i < len; i++) {
+      img = ref[i];
+      tileElement = makeFasionTile(img);
+      setClickEvent(tileElement, img);
+      results.push(holderElement.appendChild(tileElement));
+    }
+    return results;
+  } else {
+    return alert("There was a error when loading tiles");
+  }
+});

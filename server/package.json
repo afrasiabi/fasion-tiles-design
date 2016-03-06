@@ -1,0 +1,21 @@
+{
+  "name": "p2",
+  "version": "1.0.0",
+  "description": "show fasion tiles design",
+  "main": "server.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "running": "nodemon server.coffee"
+  },
+  "author": "azadeh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mysql": "^2.10.2",
+    "express-cors": "0.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "*",
+    "coffee-script": "*"
+  }
+}

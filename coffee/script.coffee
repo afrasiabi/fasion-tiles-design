@@ -1,64 +1,8 @@
-images = [
-	{
-		src: "./assets/pics/Fasionairy.png"
-		title: "Fasion"
-		tileSize: {
-			width:250
-			height:250
-		}
-	}
-	{
-		src: "./assets/pics/menStyle.jpg"
-		title: "menStyle"
-		tileSize: {
-			width:300
-			height:300
-		}
-	}
-	{
-	 	src: "./assets/pics/walkThrough.jpg"
-		title: "walkThrough"
-		tileSize: {
-	 		width:250
-	 		height:250
-	 	}
-	}
-	{
-		src: "./assets/pics/sweetHome.jpg"
-		title: "sweetHome"
-		tileSize: {
-			width:500
-			height:300
-		}
-	}
-	{
-		src: "./assets/pics/babies.jpg"
-		title: "babies"
-		tileSize: {
-			width:400
-			height:300
-		}
-	}
-	{
-		src: "./assets/pics/coool.jpg"
-		title: "cool"
-		tileSize: {
-			width:500
-			height:345
-		}
-	}
-	{
-	 	src: "./assets/pics/beautiful.png"
-		title: "beautiful"
-		tileSize: {
-	 		width:320
-	 		height:320
-	 	}
-	}
-]
+images = []
+
 makeFasionTile = (tileInfo) ->
 	tileInnerHTML = """
-		<img src="#{tileInfo.src}" alt="#{tileInfo.title}">
+		<img src="#{tileInfo.source}" alt="#{tileInfo.title}">
 	"""
 	containerElement = document.createElement "div"
 	containerElement.classList.add "container"
@@ -83,13 +27,37 @@ hide = ->
 
 setClickEvent = (tiles,tileInfo) ->
 	tiles.addEventListener "click", (event) ->
-		show(tileInfo.src)
-
+		show(tileInfo.source)
 image.addEventListener "click" , hide 
-		
+
+makeRequest = (url, cbFunc) ->
+	alertContents = ->
+		if httpRequest.readyState == XMLHttpRequest.DONE
+			if httpRequest.status == 200
+				cbFunc httpRequest.responseText
+			else
+				alert "There was a problem with the request to #{url}"
+		return
+
+	httpRequest = new XMLHttpRequest
+
+	if !httpRequest
+		alert 'Giving up :( Cannot create an XMLHTTP instance'
+		return false
+	else	
+		httpRequest.onreadystatechange = alertContents
+		httpRequest.open 'GET', url
+		httpRequest.send()
+		return
+
 holderElement = document.getElementById "tileHolder"
-for img in images
-	tileElement = makeFasionTile(img)
-	setClickEvent(tileElement,img)
-	holderElement.appendChild(tileElement)
+makeRequest "http://localhost:3000/gettingTiles",(res) ->	
+	resObject = JSON.parse(res)
+	if resObject.success
+		for img in resObject.tiles
+			tileElement = makeFasionTile(img)
+			setClickEvent(tileElement,img)
+			holderElement.appendChild(tileElement)
+	else
+		alert "There was a error when loading tiles"
 
